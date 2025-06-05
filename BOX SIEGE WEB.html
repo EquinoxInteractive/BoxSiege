@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>BOX SIEGE</title>
+    <link rel="website icon" type="png" href="CSS/Fix.jpg">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <!-- Audio element -->
+    <audio id="background-audio" autoplay loop>
+        <source src="BGM/BGM 1.MP3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Audio control button -->
+    <div class="audio-control">
+        <div class="record-disc rotating"></div>
+    </div>
+
+    <header>
+        <nav>
+            <a href="#home" class="logo">BOX SIEGE</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#characters">Characters</a></li>
+                <li><a href="#maps">Maps</a></li>
+                <li><a href="#power-ups">Power Ups</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="VIDS/BG.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1>BOX SIEGE</h1>
+            <p>PvP Co-op game</p>
+            <a href="#download" class="cta-button">Download Game</a>
+        </div>
+    </section>
+
+    <section id="features" class="features fade-in">
+        <h2 class="section-title">Game Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">Play</div>
+                <p>You can play this game with your friends on one computer and it doesn't require internet. so you can play anywhere as long as you have a computer or laptop.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">Gameplay</div>
+                <p>The game is based on 1v1 best of 3, and the time of each round can be set from 30 seconds to 5 minutes. Additional power up items are scattered around the map.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">Keybind</div>
+                <p>You can change the buttons as you want, such as changing the fire, jump, left, right, and down buttons for player 1 and player 2.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="characters" class="characters fade-in">
+        <h2 class="section-title">Game Characters</h2>
+        
+        <div class="character-section">
+            <h3 class="player-title">Player 1 Characters</h3>
+            <div class="slider" data-player="player1">
+                <div class="slider-container">
+                    <div class="slide" data-character="angry" data-sprite="IMG/P1/angry.png" data-death-sprite="IMG/P1/angrydie.png" data-gun-sprite="IMG/P1/gunp1.png">
+                        <img src="IMG/P1/angry.png" alt="Angry">
+                        <h4>Angry</h4>
+                    </div>
+                    <div class="slide" data-character="bandel" data-sprite="IMG/P1/bandel1.png" data-death-sprite="IMG/P1/bandel1-die.png" data-gun-sprite="IMG/P1/gunp1.png">
+                        <img src="IMG/P1/bandel1.png" alt="Bandel">
+                        <h4>Bandel</h4>
+                    </div>
+                    <div class="slide" data-character="melow" data-sprite="IMG/P1/melow.png" data-death-sprite="IMG/P1/melowdie.png" data-gun-sprite="IMG/P1/gunp1.png">
+                        <img src="IMG/P1/melow.png" alt="Melow">
+                        <h4>Melow</h4>
+                    </div>
+                    <div class="slide" data-character="ninja" data-sprite="IMG/P1/ninja.png" data-death-sprite="IMG/P1/ninjadie.png" data-gun-sprite="IMG/P1/gunp1.png">
+                        <img src="IMG/P1/ninja.png" alt="Ninja">
+                        <h4>Ninja</h4>
+                    </div>
+                </div>
+                <button class="slider-btn prev">←</button>
+                <button class="slider-btn next">→</button>
+            </div>
+        </div>
+
+        <div class="character-section">
+            <h3 class="player-title">Player 2 Characters</h3>
+            <div class="slider" data-player="player2">
+                <div class="slider-container">
+                    <div class="slide" data-character="calm" data-sprite="IMG/P2/calmblue.png" data-death-sprite="IMG/P2/calmbluedie.png" data-gun-sprite="IMG/P2/gunp2.png">
+                        <img src="IMG/P2/calmblue.png" alt="Calm">
+                        <h4>Calm</h4>
+                    </div>
+                    <div class="slide" data-character="baik" data-sprite="IMG/P2/baik1.png" data-death-sprite="IMG/P2/baik1-die.png" data-gun-sprite="IMG/P2/gunp2.png">
+                        <img src="IMG/P2/baik1.png" alt="Baik">
+                        <h4>Baik</h4>
+                    </div>
+                    <div class="slide" data-character="mime" data-sprite="IMG/P2/mime.png" data-death-sprite="IMG/P2/mimedie.png" data-gun-sprite="IMG/P2/gunp2.png">
+                        <img src="IMG/P2/mime.png" alt="Mime">
+                        <h4>Mime</h4>
+                    </div>
+                    <div class="slide" data-character="silat" data-sprite="IMG/P2/silat.png" data-death-sprite="IMG/P2/silat-die.png" data-gun-sprite="IMG/P2/gunp2.png">
+                        <img src="IMG/P2/silat.png" alt="Silat">
+                        <h1>Silat</h1>
+                    </div>
+                </div>
+                <button class="slider-btn prev">←</button>
+                <button class="slider-btn next">→</button>
+            </div>
+        </div>
+
+        <div id="character-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">×</span>
+                <h1 id="character-modal-title"></h1>
+                <div class="character-sprites">
+                    <div class="sprite-item">
+                        <img id="character-sprite" src="" alt="Character Sprite">
+                        <p>Character</p>
+                    </div>
+                    <div class="sprite-item">
+                        <img id="character-death-sprite" src="" alt="Death Sprite">
+                        <p>Character Death</p>
+                    </div>
+                    <div class="sprite-item">
+                        <img id="character-gun-sprite" src="" alt="Gun Sprite">
+                        <p>Gun</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="maps" class="maps">
+        <div class="container">
+            <h2 class="section-title fade-in">Game Maps</h2>
+            <div class="maps-grid">
+                <div class="map-card fade-in" data-map="earth" data-modal-image="IMG/stage in game/earth.png">
+                    <img src="IMG/stage/erth.png" alt="Earth">
+                    <h1>Earth</h1>
+                </div>
+                <div class="map-card fade-in" data-map="hell" data-modal-image="IMG/stage in game/hell.png">
+                    <img src="IMG/stage/hell.png" alt="Hell">
+                    <h1>Hell</h1>
+                </div>
+                <div class="map-card fade-in" data-map="snow" data-modal-image="IMG/stage in game/snow.png">
+                    <img src="IMG/stage/snow.png" alt="Snow">
+                    <h1>Snow</h1>
+                </div>
+                <div class="map-card fade-in" data-map="dessert" data-modal-image="IMG/stage in game/dessert.png">
+                    <img src="IMG/stage/dessert.png" alt="Dessert">
+                    <h1>Dessert</h1>
+                </div>
+            </div>
+        </div>
+        <div id="map-modal" class="modal">
+            <div class="modal-content">
+                <h1>Map In Game</h1>
+                <span class="close-modal">&times;</span>
+                <img id="modal-image" src="" alt="Map">
+                <h1 id="modal-title"></h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="power-ups fade-in" id="power-ups">
+        <div class="container">
+            <h2 class="section-title">Power-Ups</h2>
+            <div class="power-ups-grid">
+                <div class="power-up-card" data-power-up="speed-boost" data-video="VIDS/preview/Speed-Preview.mp4">
+                    <h3 class="power-up-title">Speed Boost</h3>
+                    <img src="IMG/itempowerup/gerakspeed.png" alt="Speed Boost">
+                    <p>Player will get a fast running effect for 10 seconds.</p>
+                </div>
+                <div class="power-up-card" data-power-up="health-regen" data-video="VIDS/preview/Jump-Preview.mp4">
+                    <h3 class="power-up-title">Jump Boost</h3>
+                    <img src="IMG/itempowerup/jumpboost.png" alt="Health Regen">
+                    <p>Player will get a high jump effect for 10 seconds.</p>
+                </div>
+                <div class="power-up-card" data-power-up="damage-shield" data-video="VIDS/preview/Heal-Preview.mp4">
+                    <h3 class="power-up-title">Heal</h3>
+                    <img src="IMG/itempowerup/health.png" alt="Damage Shield">
+                    <p>Player will get one health bar back, if the health bar has not decreased then it will not increase.</p>
+                </div>
+                <div class="power-up-card" data-power-up="power-surge" data-video="VIDS/preview/Shield-Preview.mp4">
+                    <h3 class="power-up-title">Shield</h3>
+                    <img src="IMG/itempowerup/perisai.png" alt="Power Surge">
+                    <p>Player will get 2 shields without a specified time.</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="power-up-modal">
+            <div class="modal-content">
+                <span class="close-modal">×</span>
+                <video id="power-up-video" autoplay muted loop>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h1 id="power-up-title"></h1>
+                <p id="power-up-description"></p>
+            </div>
+        </div>
+    </section>
+
+   <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title fade-in">Download Game</h2>
+            <div class="download-grid">
+                <div class="download-info fade-in">
+                    <h3>Download BOX SIEGE</h3>
+                    <p>Immerse yourself in the ultimate PvP co-op 2D experience with Box Siege, exclusively available for Windows PC.</p>
+                    <h4>Minimum Requirements:</h4>
+                    <ul class="system-requirements">
+                        <li>OS: Windows 10/11 (64-bit)</li>
+                        <li>Processor: Intel Core i3</li>
+                        <li>Memory: 4 GB RAM</li>
+                        <li>Graphics: NVIDIA GeForce GT 730</li>
+                        <li>Storage: 500 MB available space</li>
+                    </ul>
+                    <a href="https://www.dropbox.com/scl/fi/k1vzxztintpao1vuuebj9/BOX-SIEGE-BETA.zip?rlkey=4ib5de8204wotcfpkpdeipwn0&st=w9r70qic&dl=1" class="download-btn primary">
+                        <div>
+                            <strong>Download for Windows</strong><br>
+                            <small>Beta Version</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="download-image fade-in">
+                    <video autoplay muted loop class="download-video">
+                        <source src="VIDS/SC.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://www.tiktok.com/@equinox.interactive" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="https://www.instagram.com/equinox.interactive/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://x.com/EquinoxIntratve" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        </div>
+        <p>&copy; 2025 Equinox Interactive. All rights reserved</p>
+    </footer>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>
