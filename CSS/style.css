@@ -292,6 +292,31 @@ nav {
     font-size: 1.5rem;
 }
 
+/* How To Play Section */
+.how-to-play {
+    padding: 100px 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 241, 255, 0.05) 50%, transparent 100%);
+}
+
+.controls-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.controls-img {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.controls-img:hover {
+    transform: scale(1.10);
+}
+
 /* Power-Ups Section */
 .power-ups {
     padding: 100px 0;
@@ -845,8 +870,8 @@ footer {
 }
 
 :root {
-    --mobile-card-width: 180px; /* Default width, adjustable */
-    --mobile-grid-gap: 5px; /* Adjustable gap */
+    --mobile-card-width: 180px;
+    --mobile-grid-gap: 5px;
 }
 
 /* Responsive */
@@ -908,7 +933,7 @@ footer {
     /* Power-Ups Section */
     .power-ups-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--mobile-grid-gap);
         padding: 0 var(--mobile-grid-gap);
     }
@@ -917,7 +942,7 @@ footer {
         padding: 1rem;
         margin: 0;
         min-width: 0;
-        max-width: var(--mobile-card-width); /* Use custom property */
+        max-width: var(--mobile-card-width);
     }
 
     .power-up-card img {
@@ -979,7 +1004,7 @@ footer {
     /* Game Maps Section */
     .maps-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--mobile-grid-gap);
         padding: 0 var(--mobile-grid-gap);
     }
@@ -988,7 +1013,7 @@ footer {
         padding: 1rem;
         margin: 0;
         min-width: 0;
-        max-width: var(--mobile-card-width); /* Use custom property */
+        max-width: var(--mobile-card-width);
     }
 
     .map-card img {
