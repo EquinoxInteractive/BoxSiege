@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73292cf7a54bf0d4a85d600628e51961, type: 3}
+  m_Name: PSControllerIcons
+  m_EditorClassIdentifier: 
+  Cross: {fileID: 21300000, guid: 1585cc0f40ce3f1418d06363b8b86368, type: 3}
+  Circle: {fileID: 21300000, guid: 1ce97056e0a8a5c4797e17387ed4175a, type: 3}
+  Square: {fileID: 21300000, guid: 1734bc93caae5e24d96408800a77be06, type: 3}
+  Triangle: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  L1: {fileID: 21300000, guid: 6f7674e6ca61ca8498d9f3bbc6b125db, type: 3}
+  R1: {fileID: 21300000, guid: c77e8823aefd16c4ba68dff738098acb, type: 3}
+  L2: {fileID: 21300000, guid: 939a0c72a183519458ae82ccda5146d6, type: 3}
+  R2: {fileID: 21300000, guid: e98c9cd4a5227714a9498c0b7ae96945, type: 3}
+  L3: {fileID: 21300000, guid: 9af1dc031bb47334a99a2adef2b69c49, type: 3}
+  R3: {fileID: 21300000, guid: e0e97e307ba7c6647a96d1df8a06079f, type: 3}
+  Options: {fileID: 21300000, guid: de7d8d52827a94744b50d0e9f115fda1, type: 3}
+  Share: {fileID: 21300000, guid: 18f6706ee80205c47b6134ab8a61b35d, type: 3}
+  DPadUp: {fileID: 21300000, guid: 68ce53126bb0edb4fa3af2dba15b2086, type: 3}
+  DPadDown: {fileID: 21300000, guid: fc0aef99e2f9aa14ca6e548a48a68605, type: 3}
+  DPadLeft: {fileID: 21300000, guid: 71d5ad3cd625bde499025f2989ba9a6e, type: 3}
+  DPadRight: {fileID: 21300000, guid: 12a6ae5171319924f9f8072381648cd2, type: 3}
+  LeftStickUp: {fileID: 21300000, guid: 82e965490829d3b44a4fe0bf460eff5b, type: 3}
+  LeftStickDown: {fileID: 21300000, guid: 0c0bddd4815d62a4986db9921f97461d, type: 3}
+  LeftStickLeft: {fileID: 21300000, guid: ab2df8d1fee8d4f4e849915e2a3500e5, type: 3}
+  LeftStickRight: {fileID: 21300000, guid: fa639d63cffbe5c418b9d2b968b10aec, type: 3}
+  LeftStick: {fileID: 21300000, guid: d4fcd3d8b171d4347aca0f18279205d8, type: 3}
+  RightStickUp: {fileID: 21300000, guid: 81e174f668be5b042a929ea524ba0fb5, type: 3}
+  RightStickDown: {fileID: 21300000, guid: d40687ae29e23e146b9ce0eb33d85382, type: 3}
+  RightStickLeft: {fileID: 21300000, guid: 943ae619fd3b91b499eb6136dd01460c, type: 3}
+  RightStickRight: {fileID: 21300000, guid: c505cd3ab3f7ded489a15c1a8a5a7373, type: 3}
+  RightStick: {fileID: 21300000, guid: a973f95cfa573cd4a82feefa21e31541, type: 3}
+  HID_Button1: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button2: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button3: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button4: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button5: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button6: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button7: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button8: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button9: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button10: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button11: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Button12: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Trigger: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_StickUp: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_StickDown: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_StickLeft: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_StickRight: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick2Up: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick2Down: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick2Left: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick2Right: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  HID_Stick2: {fileID: 21300000, guid: 389be55c6e6c83c4b9bb9cab8c64f92c, type: 3}
+  customEntries: []

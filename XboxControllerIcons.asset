@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0e00bc6c768bf458128a07df65f464, type: 3}
+  m_Name: XboxControllerIcons
+  m_EditorClassIdentifier: 
+  ButtonA: {fileID: 21300000, guid: 603507bf382b178438a437b53a24f158, type: 3}
+  ButtonB: {fileID: 21300000, guid: 0893a234dea8327459ad2572fa335297, type: 3}
+  ButtonX: {fileID: 21300000, guid: 2389a8609c69bdf48bfeb7ef8e8d03b3, type: 3}
+  ButtonY: {fileID: 21300000, guid: cf0f4dc381e3da442a400888a8c76850, type: 3}
+  LB: {fileID: 21300000, guid: 5593b52151cd9e047a475c7c82c987c3, type: 3}
+  RB: {fileID: 21300000, guid: 8353b0b4180c58f42b56af1fa471de7d, type: 3}
+  LT: {fileID: 21300000, guid: 486134eb620f15a4f8c39cbcae972aa7, type: 3}
+  RT: {fileID: 21300000, guid: ca3f45abc9fa17b4880e64b6afa5c172, type: 3}
+  LS: {fileID: 21300000, guid: e17fce13dd17ae0479c8717e33b3b435, type: 3}
+  RS: {fileID: 21300000, guid: dd1d5bd06f4160e4c9cf801248db56ee, type: 3}
+  MenuStart: {fileID: 21300000, guid: eef9896016ab9364cb13e5f3c914e06c, type: 3}
+  ViewBack: {fileID: 21300000, guid: ff7482f95aec6b641b4faa75e2b18ff1, type: 3}
+  DPadUp: {fileID: 21300000, guid: c3d4403ea9055e84ba07726f7fb9692d, type: 3}
+  DPadDown: {fileID: 21300000, guid: f906e8472c907e4409e20307d7bff635, type: 3}
+  DPadLeft: {fileID: 21300000, guid: 23e4b284b81ec6a4bb95b73371dc6a09, type: 3}
+  DPadRight: {fileID: 21300000, guid: dbeefb5c5ac63b4499e4607b9ff68e20, type: 3}
+  LeftStickUp: {fileID: 21300000, guid: ec2d6a792b6a4444785e8b7d3a509796, type: 3}
+  LeftStickDown: {fileID: 21300000, guid: 2aeeb4de1e226d541a95b69404b5d9cc, type: 3}
+  LeftStickLeft: {fileID: 21300000, guid: eb0affa24dce1ab4f874728c1ea47e45, type: 3}
+  LeftStickRight: {fileID: 21300000, guid: 6c0c5018768e25743a8825652fcd8fef, type: 3}
+  LeftStick: {fileID: 21300000, guid: e17fce13dd17ae0479c8717e33b3b435, type: 3}
+  RightStickUp: {fileID: 21300000, guid: 965bd167e5cf63345a9c51a89d2b9ad9, type: 3}
+  RightStickDown: {fileID: 21300000, guid: cd271f1b39d3e5e40a3816f5b143f9bf, type: 3}
+  RightStickLeft: {fileID: 21300000, guid: 21610c6d19d6c1849b62d95f2906e837, type: 3}
+  RightStickRight: {fileID: 21300000, guid: 0745ef433788c9a488f7fc4894b0562a, type: 3}
+  RightStick: {fileID: 21300000, guid: dd1d5bd06f4160e4c9cf801248db56ee, type: 3}
+  LeftStickPress: {fileID: 21300000, guid: 658869562e6c41641bda380f87f0c430, type: 3}
+  RightStickPress: {fileID: 21300000, guid: 569e468dc09a33646a5fd2bb6ecfcd9e, type: 3}
+  customEntries: []

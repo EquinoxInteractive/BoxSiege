@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf02488ab9f0bd4bab01d62319e4740, type: 3}
+  m_Name: Scream P1
+  m_EditorClassIdentifier: 
+  weaponName: Scream
+  weaponSprite: {fileID: 21300000, guid: fdd2c921c62d2cd43b815fa60199d5de, type: 3}
+  bulletPrefab: {fileID: 4821215879300739271, guid: 0d3866d66ed8c09438a7bbea7c34ba26, type: 3}
+  bulletSpeed: 50
+  fireRate: 5
+  damage: 3
+  maxAmmo: 3
+  shootSound: {fileID: 8300000, guid: 80673174997e0b04d993aeeb494273e6, type: 3}
+  emptySound: {fileID: 8300000, guid: 2513f6f5fb37be34abd9561e24e94e28, type: 3}
+  hasSecondary: 1
+  secondarySprite: {fileID: 21300000, guid: 2acb355f572e6b54fba005b011635023, type: 3}
+  secondaryBulletPrefab: {fileID: 4821215879300739271, guid: 0d3866d66ed8c09438a7bbea7c34ba26, type: 3}
+  secondaryBulletSpeed: 10
+  secondaryFireRate: 0.5
+  secondaryDamage: 0.25
+  secondaryShootSound: {fileID: 8300000, guid: e01da4e4b64668b46bf8118264192c89, type: 3}
+  meleeSprite: {fileID: 21300000, guid: 7203dcb9e449d864db086d8ed15bb1d3, type: 3}
+  meleeDamage: 3
+  meleeFireRate: 1
+  meleeRange: 0.3
+  meleeSound: {fileID: 8300000, guid: 50bfdc8e10403954999e233e9427dbe7, type: 3}
+  weaponSwitchSound: {fileID: 8300000, guid: 8bc90dc26a6920a4fbcb3fbbbf47d044, type: 3}
