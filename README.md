@@ -155,8 +155,8 @@ public class CharacterData : ScriptableObject
 
 | Player | Characters |
 |--------|-----------|
-| P1 | Angry, Bandel, Melow, Ninja, Baiki |
-| P2 | Calm, Silat, Mime, CalmBlue |
+| P1 | Angry, Bandel, Melow, Ninja |
+| P2 | Calm, Silat, Mime, Baik |
 | P3 | Blind, Drunk, Joker, Spiderweaver |
 | P4 | Bald-man, Deadswim, Savior, Spiderblack |
 
