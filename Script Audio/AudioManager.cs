@@ -20,6 +20,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip shieldPowerUp;
     public AudioClip jumpBoostPowerUp;
     public AudioClip speedBoostPowerUp;
+    public AudioClip invisiblePowerUp;
+    public AudioClip swapPositionPowerUp;
+    public AudioClip swapPositionActivate;
+    public AudioClip ammoRefillPowerUp;
     public AudioClip fight;
     public AudioClip round1;
     public AudioClip round2;

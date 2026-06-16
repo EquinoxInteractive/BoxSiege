@@ -45,6 +45,7 @@ public class PlayerShooting : MonoBehaviour
     private bool  isMeleeMode      = false;
     private float nextMeleeTime    = 0f;
     private bool  isKnifeOnlyMode  = false;   // ← NEW: Sudden Death lock
+    private bool  isInvisible      = false;   // ← NEW: Invisible power-up lock
     private AudioManager audioManager;
 
     // ── Melee Animation ───────────────────────────────────────────────────────
@@ -135,6 +136,18 @@ public class PlayerShooting : MonoBehaviour
             return;
 
         if (!value.isPressed) return;
+
+        // ── Swap Position power-up ────────────────────────────────────────────
+        // Jika pemain memiliki window konfirmasi Swap Position yang aktif,
+        // tekanan tombol Shoot ini HANYA dipakai untuk konfirmasi swap —
+        // tidak boleh juga memicu tembakan/serangan melee pada frame yang
+        // sama (mencegah "swap-kill": pemain berpindah lalu langsung
+        // menyerang/melee korban di posisi baru pada frame yang sama).
+        var effects = GetComponent<PlayerPowerUpEffects>();
+        if (effects != null && effects.TryConsumeSwapWindow())
+        {
+            return;
+        }
 
         if (isMeleeMode) { PerformMeleeAttack(); return; }
         if (isKnifeOnlyMode) { PerformMeleeAttack(); return; }  // Sudden Death: selalu melee
@@ -275,7 +288,11 @@ public class PlayerShooting : MonoBehaviour
             rb.velocity = isFacingRight ? Vector2.right * spawnSpeed : Vector2.left * spawnSpeed;
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        if (bulletScript != null) bulletScript.damage = spawnDamage;
+        if (bulletScript != null)
+        {
+            bulletScript.damage = spawnDamage;
+            if (isInvisible) bulletScript.SetInvisible(true);
+        }
 
         Destroy(bullet, 2f);
 
@@ -297,6 +314,83 @@ public class PlayerShooting : MonoBehaviour
 
         PlaySound(weaponData?.weaponSwitchSound);
         OnSwitchedToSecondary?.Invoke();
+    }
+
+    // ── Invisible Power-Up ────────────────────────────────────────────────────
+    // Menyembunyikan sprite senjata & melee milik pemain selama power-up
+    // Invisible aktif. Sprite player utama disembunyikan dari
+    // PlayerPowerUpEffects (yang memiliki referensi SpriteRenderer player).
+    // Peluru yang ditembak selama mode ini otomatis dibuat invisible (lihat Shoot()).
+    //
+    // PENTING: enabled di-set TANPA syarat (tidak dicek activeSelf/isMeleeMode),
+    // baik untuk weaponSpriteRenderer maupun meleeSpriteRenderer, agar:
+    //  - Saat invisible AKTIF, kedua renderer disembunyikan terlepas dari
+    //    senjata mana yang sedang dipakai.
+    //  - Saat invisible BERAKHIR, kedua renderer dipastikan kembali terlihat
+    //    (enabled = true) walaupun pemain sempat berganti senjata (primary <-> knife)
+    //    selama invisible berlangsung. Ini mencegah senjata "tetap hilang"
+    //    setelah invisible habis.
+    public void SetInvisible(bool invisible)
+    {
+        isInvisible = invisible;
+
+        if (weaponSpriteRenderer != null)
+            weaponSpriteRenderer.enabled = !invisible;
+
+        if (meleeSpriteRenderer != null)
+            meleeSpriteRenderer.enabled = !invisible;
+    }
+
+    // ── Ammo Refill Power-Up ──────────────────────────────────────────────────
+    // Mengisi ulang peluru ke maxAmmo sesuai WeaponData.
+    // Jika sedang menggunakan secondary weapon (karena primary kosong),
+    // kembalikan dulu ke primary weapon dengan ammo penuh.
+    //
+    // PENTING — UI saat memegang knife (isMeleeMode):
+    //   UI ammo untuk knife selalu menampilkan "unlimited" (ShowMeleeMode).
+    //   Saat refill terjadi sambil memegang knife, state ammo internal
+    //   (currentAmmo, isUsingSecondary, dst.) tetap di-reset ke primary penuh,
+    //   namun UI TIDAK ditampilkan sebagai angka — UI unlimited tetap dipertahankan.
+    //   OnAmmoPrimaryChanged tetap di-invoke (agar cache ammo di AmmoUI ikut
+    //   ter-update ke nilai penuh), lalu segera disusul OnSwitchedToMelee
+    //   untuk memaksa UI kembali ke tampilan unlimited.
+    //   Dengan begitu, saat pemain berganti dari knife ke senjata utama
+    //   (OnSwitchedFromMelee → HideMeleeMode(cachedAmmo)), angka yang
+    //   ditampilkan adalah ammo penuh hasil refill — bukan angka lama
+    //   sebelum refill.
+    public void RefillAmmo()
+    {
+        if (weaponData == null) return;
+
+        bool wasUsingSecondary = isUsingSecondary;
+
+        isUsingSecondary = false;
+        isPrimaryEmpty   = false;
+        currentAmmo      = weaponData.maxAmmo;
+        bulletPrefab     = weaponData.bulletPrefab;
+        bulletSpeed      = weaponData.bulletSpeed;
+        fireRate         = weaponData.fireRate;
+
+        // Update cache ammo di AmmoUI (selalu), lalu jika sedang memegang
+        // knife, segera paksa UI kembali ke tampilan "unlimited" agar
+        // angka ammo tidak sempat terlihat di UI knife.
+        OnAmmoPrimaryChanged?.Invoke(currentAmmo);
+        if (isMeleeMode)
+        {
+            OnSwitchedToMelee?.Invoke();
+        }
+
+        // Jika sebelumnya pakai secondary, kembalikan sprite & state ke primary.
+        // Sprite weapon hanya diubah jika tidak sedang dalam melee mode
+        // (jika sedang melee, sprite weapon disembunyikan — tapi tetap
+        // diset agar benar saat pemain kembali ke primary nanti).
+        if (wasUsingSecondary && weaponSpriteRenderer != null && weaponData.weaponSprite != null)
+        {
+            weaponSpriteRenderer.sprite = weaponData.weaponSprite;
+        }
+
+        if (wasUsingSecondary && !isMeleeMode)
+            OnResetAmmo?.Invoke(weaponData.maxAmmo);
     }
 
     private void PlaySound(AudioClip clip)

@@ -44,14 +44,29 @@ public class Health : MonoBehaviour
     {
         // Non-peserta Sudden Death tidak bisa menerima damage lebih lanjut
         if (isEliminated) return;
-
-        if (_damage > 0 && powerUpEffects != null && powerUpEffects.HasShield())
+        if (_damage <= 0)
         {
-            if (audioManager != null) audioManager.PlaySFX(audioManager.shieldPowerUp);
+            // Damage negatif = heal
+            currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
             return;
         }
 
-        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        // Serap sebanyak mungkin damage menggunakan shield terlebih dahulu.
+        // Sisa damage (jika ada) diteruskan ke health bar.
+        float remainingDamage = _damage;
+        if (powerUpEffects != null)
+        {
+            int absorbed = powerUpEffects.AbsorbWithShield(_damage);
+            if (absorbed > 0)
+            {
+                if (audioManager != null) audioManager.PlaySFX(audioManager.shieldPowerUp);
+                remainingDamage = Mathf.Max(0f, _damage - absorbed);
+            }
+        }
+
+        if (remainingDamage <= 0f) return;
+
+        currentHealth = Mathf.Clamp(currentHealth - remainingDamage, 0, startingHealth);
 
         if (currentHealth <= 0 && !isDead)
         {

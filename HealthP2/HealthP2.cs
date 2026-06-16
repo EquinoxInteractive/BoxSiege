@@ -42,14 +42,26 @@ public class HealthP2 : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         if (isEliminated) return;
-
-        if (_damage > 0 && powerUpEffects != null && powerUpEffects.HasShield())
+        if (_damage <= 0)
         {
-            if (audioManager != null) audioManager.PlaySFX(audioManager.shieldPowerUp);
+            currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
             return;
         }
 
-        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        float remainingDamage = _damage;
+        if (powerUpEffects != null)
+        {
+            int absorbed = powerUpEffects.AbsorbWithShield(_damage);
+            if (absorbed > 0)
+            {
+                if (audioManager != null) audioManager.PlaySFX(audioManager.shieldPowerUp);
+                remainingDamage = Mathf.Max(0f, _damage - absorbed);
+            }
+        }
+
+        if (remainingDamage <= 0f) return;
+
+        currentHealth = Mathf.Clamp(currentHealth - remainingDamage, 0, startingHealth);
 
         if (currentHealth <= 0 && !isDead)
         {

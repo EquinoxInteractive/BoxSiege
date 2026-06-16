@@ -1,13 +1,18 @@
-// PowerUpTimerUI.cs — Fixed: icon+text management, SD icon tanpa slot baru
+// PowerUpTimerUI.cs — Updated: tambah slot UI untuk Invisible & Swap Position
 // 1 instance per player. Assign di Inspector:
-//   Speed Boost Icon  → parent GO icon speed (di-show saat speed aktif)
-//   Speed Boost Text  → TMP child dari icon (di-hide saat SD)
-//   Jump Boost Icon   → parent GO icon jump
-//   Jump Boost Text   → TMP child dari icon
-//   Shield Icon       → parent GO icon shield
-//   Shield Hits Text  → TMP child dari icon
+//   Speed Boost Icon     → parent GO icon speed (di-show saat speed aktif)
+//   Speed Boost Text     → TMP child dari icon (di-hide saat SD)
+//   Jump Boost Icon      → parent GO icon jump
+//   Jump Boost Text      → TMP child dari icon
+//   Shield Icon          → parent GO icon shield
+//   Shield Hits Text     → TMP child dari icon
+//   Invisible Icon       → parent GO icon invisible (BARU)
+//   Invisible Text       → TMP child dari icon invisible (BARU)
+//   Swap Position Icon   → parent GO icon swap position (BARU)
+//   Swap Position Text   → TMP child dari icon swap position (BARU)
 //
 // TIDAK perlu slot tambahan untuk Sudden Death — pakai icon yang sama.
+// Ammo Refill TIDAK memiliki timer UI karena bersifat instan (seperti Heal).
 // File ini menggantikan: PowerUp/PowerUpTimerUI.cs
 
 using UnityEngine;
@@ -27,15 +32,27 @@ public class PowerUpTimerUI : MonoBehaviour
     [SerializeField] private GameObject      shieldIcon;
     [SerializeField] private TextMeshProUGUI shieldHitsText;
 
+    [Header("Invisible UI")]
+    [SerializeField] private GameObject      invisibleIcon;
+    [SerializeField] private TextMeshProUGUI invisibleTimerText;
+
+    [Header("Swap Position UI")]
+    [SerializeField] private GameObject      swapPositionIcon;
+    [SerializeField] private TextMeshProUGUI swapPositionTimerText;
+
     // ─── State ────────────────────────────────────────────────────────────────
     private float speedRemainingTime  = 0f;
     private float jumpRemainingTime   = 0f;
     private float shieldRemainingTime = 0f;
     private int   shieldHitsCount     = 0;
+    private float invisibleRemainingTime     = 0f;
+    private float swapPositionRemainingTime  = 0f;
 
-    private bool speedBoostActive  = false;
-    private bool jumpBoostActive   = false;
-    private bool shieldBoostActive = false;
+    private bool speedBoostActive    = false;
+    private bool jumpBoostActive     = false;
+    private bool shieldBoostActive   = false;
+    private bool invisibleActive     = false;
+    private bool swapPositionActive  = false;
 
     // Saat true: icon speed+jump menyala permanen, text disembunyikan, countdown berhenti
     private bool isSuddenDeathMode = false;
@@ -45,9 +62,13 @@ public class PowerUpTimerUI : MonoBehaviour
         SetGO(speedBoostIcon, false);
         SetGO(jumpBoostIcon,  false);
         SetGO(shieldIcon,     false);
+        SetGO(invisibleIcon,  false);
+        SetGO(swapPositionIcon, false);
         SetGO(speedBoostTimerText?.gameObject, false);
         SetGO(jumpBoostTimerText?.gameObject,  false);
         SetGO(shieldHitsText?.gameObject,      false);
+        SetGO(invisibleTimerText?.gameObject,      false);
+        SetGO(swapPositionTimerText?.gameObject,   false);
     }
 
     private void Update()
@@ -101,6 +122,38 @@ public class PowerUpTimerUI : MonoBehaviour
                 SetGO(shieldHitsText?.gameObject, false);
             }
         }
+
+        // Invisible countdown
+        if (invisibleActive)
+        {
+            invisibleRemainingTime -= Time.deltaTime;
+            if (invisibleRemainingTime > 0)
+            {
+                SetText(invisibleTimerText, $"{Mathf.CeilToInt(invisibleRemainingTime)}s");
+            }
+            else
+            {
+                invisibleActive = false;
+                SetGO(invisibleIcon,                  false);
+                SetGO(invisibleTimerText?.gameObject, false);
+            }
+        }
+
+        // Swap Position countdown
+        if (swapPositionActive)
+        {
+            swapPositionRemainingTime -= Time.deltaTime;
+            if (swapPositionRemainingTime > 0)
+            {
+                SetText(swapPositionTimerText, $"{Mathf.CeilToInt(swapPositionRemainingTime)}s");
+            }
+            else
+            {
+                swapPositionActive = false;
+                SetGO(swapPositionIcon,                  false);
+                SetGO(swapPositionTimerText?.gameObject, false);
+            }
+        }
     }
 
     // ─── Public API ───────────────────────────────────────────────────────────
@@ -146,6 +199,42 @@ public class PowerUpTimerUI : MonoBehaviour
             SetText(shieldHitsText,
                 $"{hits}x | {Mathf.CeilToInt(Mathf.Max(shieldRemainingTime, 0))}s");
         }
+    }
+
+    // ─── Invisible ────────────────────────────────────────────────────────────
+    public void StartInvisibleTimer(float duration, bool isPlayer1 = true)
+    {
+        invisibleRemainingTime = duration;
+        invisibleActive        = true;
+        SetText(invisibleTimerText, $"{Mathf.CeilToInt(duration)}s");
+        SetGO(invisibleIcon,                  true);
+        SetGO(invisibleTimerText?.gameObject, true);
+    }
+
+    public void ResetInvisibleTimer(bool isPlayer1 = true)
+    {
+        invisibleRemainingTime = 0f;
+        invisibleActive        = false;
+        SetGO(invisibleIcon,                  false);
+        SetGO(invisibleTimerText?.gameObject, false);
+    }
+
+    // ─── Swap Position ────────────────────────────────────────────────────────
+    public void StartSwapPositionTimer(float duration, bool isPlayer1 = true)
+    {
+        swapPositionRemainingTime = duration;
+        swapPositionActive        = true;
+        SetText(swapPositionTimerText, $"{Mathf.CeilToInt(duration)}s");
+        SetGO(swapPositionIcon,                  true);
+        SetGO(swapPositionTimerText?.gameObject, true);
+    }
+
+    public void ResetSwapPositionTimer(bool isPlayer1 = true)
+    {
+        swapPositionRemainingTime = 0f;
+        swapPositionActive        = false;
+        SetGO(swapPositionIcon,                  false);
+        SetGO(swapPositionTimerText?.gameObject, false);
     }
 
     public void ResetSpeedBoostTimer(bool isPlayer1 = true)

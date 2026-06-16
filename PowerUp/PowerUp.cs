@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum PowerUpType { Health, Shield, JumpBoost, SpeedBoost }
+public enum PowerUpType { Health, Shield, JumpBoost, SpeedBoost, Invisible, SwapPosition, AmmoRefill }
 
 public class PowerUp : MonoBehaviour
 {
@@ -55,6 +55,15 @@ public class PowerUp : MonoBehaviour
                     case PowerUpType.SpeedBoost:
                         sfxToPlay = audioManager.speedBoostPowerUp;
                         break;
+                    case PowerUpType.Invisible:
+                        sfxToPlay = audioManager.invisiblePowerUp;
+                        break;
+                    case PowerUpType.SwapPosition:
+                        sfxToPlay = audioManager.swapPositionPowerUp;
+                        break;
+                    case PowerUpType.AmmoRefill:
+                        sfxToPlay = audioManager.ammoRefillPowerUp;
+                        break;
                 }
 
                 if (sfxToPlay != null)
@@ -77,8 +86,9 @@ public class PowerUp : MonoBehaviour
             }
 
             // Terapkan efek power-up berdasarkan tipe
-            PlayeJump2D    jumpScript      = collision.GetComponent<PlayeJump2D>();
-            PlayerMovement movementScript  = collision.GetComponent<PlayerMovement>();
+            PlayeJump2D          jumpScript     = collision.GetComponent<PlayeJump2D>();
+            PlayerMovement       movementScript = collision.GetComponent<PlayerMovement>();
+            PlayerPowerUpEffects effects        = collision.GetComponent<PlayerPowerUpEffects>();
 
             switch (powerUpType)
             {
@@ -104,6 +114,21 @@ public class PowerUp : MonoBehaviour
                 case PowerUpType.SpeedBoost:
                     if (movementScript != null)
                         movementScript.GetComponent<PlayerPowerUpEffects>().ApplySpeedBoost(1.5f, 10f);
+                    break;
+
+                case PowerUpType.Invisible:
+                    if (effects != null)
+                        effects.ApplyInvisible(3f);
+                    break;
+
+                case PowerUpType.SwapPosition:
+                    if (effects != null)
+                        effects.ApplySwapPosition(3f);
+                    break;
+
+                case PowerUpType.AmmoRefill:
+                    if (effects != null)
+                        effects.ApplyAmmoRefill();
                     break;
             }
 

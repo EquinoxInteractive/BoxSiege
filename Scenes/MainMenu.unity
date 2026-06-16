@@ -25199,7 +25199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bac41fd8227244ca891cccc7bbfc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  websiteURL: https://equinox-interactive.vercel.app/
+  websiteURL: https://equinoxinteractive.vercel.app/
 --- !u!1 &1675737462
 GameObject:
   m_ObjectHideFlags: 0

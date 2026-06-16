@@ -6,6 +6,21 @@ public class Bullet : MonoBehaviour
 {
     public float damage = 10f; // Jumlah damage yang diberikan peluru
 
+    // ─── Invisible Power-Up Support ───────────────────────────────────────────
+    // Dipanggil oleh PlayerShooting saat menembak ketika pemain dalam kondisi
+    // invisible. Menyembunyikan SpriteRenderer peluru ini agar peluru juga
+    // tidak terlihat selama power-up Invisible aktif.
+    public void SetInvisible(bool invisible)
+    {
+        if (!invisible) return;
+
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>(true);
+        foreach (SpriteRenderer sr in renderers)
+        {
+            sr.enabled = false;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Jika peluru mengenai musuh

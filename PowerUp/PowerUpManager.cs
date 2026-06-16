@@ -9,6 +9,9 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private GameObject shieldPowerUpPrefab;
     [SerializeField] private GameObject jumpBoostPowerUpPrefab;
     [SerializeField] private GameObject speedBoostPowerUpPrefab;
+    [SerializeField] private GameObject invisiblePowerUpPrefab;
+    [SerializeField] private GameObject swapPositionPowerUpPrefab;
+    [SerializeField] private GameObject ammoRefillPowerUpPrefab;
 
     [Header("Spawn Settings")]
     [SerializeField] private Vector2[] spawnPoints;              // Titik-titik spawn di map
@@ -32,7 +35,10 @@ public class PowerUpManager : MonoBehaviour
             healthPowerUpPrefab,
             shieldPowerUpPrefab,
             jumpBoostPowerUpPrefab,
-            speedBoostPowerUpPrefab
+            speedBoostPowerUpPrefab,
+            invisiblePowerUpPrefab,
+            swapPositionPowerUpPrefab,
+            ammoRefillPowerUpPrefab
         };
     }
 
