@@ -34,6 +34,21 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync("TheSnow");
     }
 
+    public void TheJungle()
+    {
+        SceneManager.LoadSceneAsync("TheJungle");
+    }
+
+    public void TheSafari()
+    {
+        SceneManager.LoadSceneAsync("TheSafari");
+    }
+
+    public void TheTample()
+    {
+        SceneManager.LoadSceneAsync("TheTample");
+    }
+
     // ─── Character Selection Scenes ───────────────────────────────────────
     // Masing-masing tombol di Main Menu (Play → 2P / 3P / 4P) memanggil
     // salah satu method ini. GameData.numberOfPlayers diset di sini

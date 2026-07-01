@@ -170,6 +170,15 @@ MonoBehaviour:
   - mapName: TheDessert
     displayName: The Dessert
     previewSprite: {fileID: 21300000, guid: 054c99c487cb10d4689802befc6fe724, type: 3}
+  - mapName: TheJungle
+    displayName: The Jungle
+    previewSprite: {fileID: 21300000, guid: bb3ac1bac0d974645a032462bb1a8187, type: 3}
+  - mapName: TheSafari
+    displayName: The Safari
+    previewSprite: {fileID: 21300000, guid: 15d9131097ae07844ae8964becf6ff37, type: 3}
+  - mapName: TheTample
+    displayName: The Tample
+    previewSprite: {fileID: 21300000, guid: 950d49568b6df07408998bdf5e8bb44c, type: 3}
 --- !u!4 &42404323
 Transform:
   m_ObjectHideFlags: 0

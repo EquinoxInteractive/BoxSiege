@@ -201,9 +201,20 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         suffix = ControllerAssignmentManager.GetDeviceIndexSuffix(assetName);
                     }
 
-                    // Icon mode: pilih icon set berdasarkan layout controller
-                    var iconsData = GetIconsDataForPath(effectivePath);
-                    if (!isKeyboardOrMouse && iconsData != null && m_BindingIcon != null)
+                    // Icon mode: pilih icon set berdasarkan device
+                    GamepadIconsData iconsData = null;
+                    if (isKeyboardOrMouse)
+                    {
+                        // Keyboard / Mouse: gunakan KeyboardIconsData
+                        iconsData = m_IconsDataKeyboard;
+                    }
+                    else
+                    {
+                        // Gamepad: pilih berdasarkan layout controller
+                        iconsData = GetIconsDataForPath(effectivePath);
+                    }
+
+                    if (iconsData != null && m_BindingIcon != null)
                     {
                         Sprite icon = iconsData.GetIcon(effectivePath);
                         if (icon != null)
@@ -215,16 +226,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                             if (m_BindingText != null)
                                 m_BindingText.text = string.Empty;
 
-                            // Suffix (0)/(1) hanya tampil di SuffixText
+                            // Suffix (0)/(1) hanya tampil di SuffixText (tidak relevan untuk keyboard)
                             if (m_SuffixText != null)
-                                m_SuffixText.text = suffix;
+                                m_SuffixText.text = isKeyboardOrMouse ? string.Empty : suffix;
 
                             updateBindingUIEvent?.Invoke(this, displayString + suffix, deviceLayoutName, controlPath);
                             return;
                         }
                     }
 
-                    // Text mode: keyboard atau icon tidak tersedia
+                    // Text mode: icon tidak tersedia (fallback ke teks)
                     if (m_BindingIcon != null)
                         m_BindingIcon.enabled = false;
 
@@ -690,7 +701,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         [SerializeField] private GamepadIconsData m_IconsDataXbox;
         [Tooltip("Icons untuk PlayStation controller (DualShock/DualSense). Kosongkan jika tidak pakai.")]
         [SerializeField] private GamepadIconsData m_IconsDataPS;
-        [Tooltip("Image component untuk icon tombol gamepad")]
+        [Tooltip("Icons untuk Keyboard & Mouse. Kosongkan jika tidak pakai.")]
+        [SerializeField] private GamepadIconsData m_IconsDataKeyboard;
+        [Tooltip("Image component untuk icon tombol gamepad / keyboard / mouse")]
         [SerializeField] private UnityEngine.UI.Image m_BindingIcon;
         [Tooltip("Text opsional untuk suffix (0)/(1) terpisah dari binding text")]
         [SerializeField] private Text m_SuffixText;

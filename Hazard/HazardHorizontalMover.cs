@@ -107,4 +107,13 @@ public class HazardHorizontalMover : MonoBehaviour
     {
         StopAllCoroutines();
     }
+
+    // Dipanggil oleh HazardResetManager setiap awal round baru.
+    // Mengembalikan posisi ke posisi awal dan me-restart loop pergerakan.
+    public void ResetHazard()
+    {
+        StopAllCoroutines();
+        transform.position = originalPosition;
+        StartCoroutine(MoveLoop());
+    }
 }

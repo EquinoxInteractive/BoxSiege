@@ -802,6 +802,7 @@ public class GameManager : MonoBehaviour
     {
         if (audioManager != null) audioManager.PlaySFX(audioManager.gameOver);
         yield return new WaitForSeconds(2f);
+        FindObjectOfType<HazardResetManager>()?.ResetAll();
         ResetPlayers();
         currentRound++;
         roundEnded = false;

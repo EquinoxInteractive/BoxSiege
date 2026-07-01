@@ -21,8 +21,20 @@ public class HazardVerticalMover : MonoBehaviour
     [Tooltip("Kecepatan pergerakan naik-turun (unit per detik).")]
     [SerializeField] private float moveSpeed = 2f;
 
-    [Tooltip("Seberapa jauh object naik ke ATAS dari posisi awal (posisi awal = posisi paling bawah).")]
+    [Tooltip("Seberapa jauh object naik ke ATAS dari posisi awal.")]
     [SerializeField] private float upDistance = 2f;
+
+    [Tooltip("Seberapa jauh object turun ke BAWAH dari posisi awal.\n" +
+             "Default 0 = posisi awal sudah menjadi titik paling bawah " +
+             "(object hanya naik lalu kembali ke posisi awal).")]
+    [SerializeField] private float downDistance = 0f;
+
+    [Header("Urutan & Delay")]
+    [Tooltip("Apakah bergerak ke ATAS dulu (true) atau ke BAWAH dulu (false) dalam satu siklus.\n\n" +
+             "true  (Move Up First)  : posisi awal → atas → awal → bawah → awal → (delay) → ulang\n" +
+             "false (Move Down First): posisi awal → bawah → awal → atas → awal → (delay) → ulang\n\n" +
+             "Jika downDistance = 0, siklus hanya naik-turun ke posisi awal tanpa fase bawah.")]
+    [SerializeField] private bool moveUpFirst = true;
 
     [Header("Delay")]
     [Tooltip("Delay (detik) setelah satu siklus penuh (naik+turun) selesai sebelum mengulang. Default 0 = tanpa delay.")]
@@ -54,18 +66,33 @@ public class HazardVerticalMover : MonoBehaviour
     {
         while (true)
         {
-            // Tunggu giliran jika object juga memiliki horizontal mover
-            // dengan order yang berbeda.
             while (!coordinator.CanMove(order))
                 yield return null;
 
-            yield return MoveTo(originalPosition + Vector3.up * upDistance);
-            yield return MoveTo(originalPosition);
+            if (moveUpFirst)
+            {
+                yield return MoveTo(originalPosition + Vector3.up * upDistance);
+                yield return MoveTo(originalPosition);
+                if (downDistance > 0f)
+                {
+                    yield return MoveTo(originalPosition + Vector3.down * downDistance);
+                    yield return MoveTo(originalPosition);
+                }
+            }
+            else
+            {
+                if (downDistance > 0f)
+                {
+                    yield return MoveTo(originalPosition + Vector3.down * downDistance);
+                    yield return MoveTo(originalPosition);
+                }
+                yield return MoveTo(originalPosition + Vector3.up * upDistance);
+                yield return MoveTo(originalPosition);
+            }
 
             if (loopDelay > 0f)
                 yield return new WaitForSeconds(loopDelay);
 
-            // Satu siklus penuh selesai — beri giliran ke mover lain (jika ada).
             coordinator.AdvanceTurn(order);
         }
     }
@@ -84,5 +111,14 @@ public class HazardVerticalMover : MonoBehaviour
     public void StopMovement()
     {
         StopAllCoroutines();
+    }
+
+    // Dipanggil oleh HazardResetManager setiap awal round baru.
+    // Mengembalikan posisi ke posisi awal dan me-restart loop pergerakan.
+    public void ResetHazard()
+    {
+        StopAllCoroutines();
+        transform.position = originalPosition;
+        StartCoroutine(MoveLoop());
     }
 }

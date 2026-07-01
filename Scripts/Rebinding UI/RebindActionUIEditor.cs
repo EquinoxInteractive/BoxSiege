@@ -21,10 +21,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_DisplayStringOptionsProperty = serializedObject.FindProperty("m_DisplayStringOptions");
 
             // Icon Support fields
-            m_IconsDataXboxProperty = serializedObject.FindProperty("m_IconsDataXbox");
-            m_IconsDataPSProperty   = serializedObject.FindProperty("m_IconsDataPS");
-            m_BindingIconProperty   = serializedObject.FindProperty("m_BindingIcon");
-            m_SuffixTextProperty    = serializedObject.FindProperty("m_SuffixText");
+            m_IconsDataXboxProperty     = serializedObject.FindProperty("m_IconsDataXbox");
+            m_IconsDataPSProperty       = serializedObject.FindProperty("m_IconsDataPS");
+            m_IconsDataKeyboardProperty = serializedObject.FindProperty("m_IconsDataKeyboard");
+            m_BindingIconProperty       = serializedObject.FindProperty("m_BindingIcon");
+            m_SuffixTextProperty        = serializedObject.FindProperty("m_SuffixText");
 
             RefreshBindingOptions();
         }
@@ -73,6 +74,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     new GUIContent("Icons Data Xbox", "Icons untuk Xbox / XInput controller"));
                 EditorGUILayout.PropertyField(m_IconsDataPSProperty,
                     new GUIContent("Icons Data PS", "Icons untuk PlayStation (DualShock / DualSense)"));
+                EditorGUILayout.PropertyField(m_IconsDataKeyboardProperty,
+                    new GUIContent("Icons Data Keyboard", "Icons untuk Keyboard & Mouse"));
                 EditorGUILayout.PropertyField(m_BindingIconProperty,
                     new GUIContent("Binding Icon", "Image component untuk menampilkan icon tombol"));
                 EditorGUILayout.PropertyField(m_SuffixTextProperty,
@@ -171,6 +174,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         // Icon Support properties
         private SerializedProperty m_IconsDataXboxProperty;
         private SerializedProperty m_IconsDataPSProperty;
+        private SerializedProperty m_IconsDataKeyboardProperty;
         private SerializedProperty m_BindingIconProperty;
         private SerializedProperty m_SuffixTextProperty;
 

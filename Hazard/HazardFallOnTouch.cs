@@ -28,6 +28,9 @@ using UnityEngine;
 public class HazardFallOnTouch : MonoBehaviour
 {
     [Header("Fall Settings")]
+    [Tooltip("Delay (detik) setelah disentuh pemain sebelum object mulai jatuh. Default 0 = langsung jatuh.")]
+    [SerializeField] private float fallDelay = 0f;
+
     [Tooltip("Kecepatan jatuh object (unit per detik).")]
     [SerializeField] private float fallSpeed = 5f;
 
@@ -35,14 +38,16 @@ public class HazardFallOnTouch : MonoBehaviour
     [SerializeField] private float fallDistance = 5f;
 
     private bool hasFallen = false;
+    private Vector3 originalPosition;
 
     private HazardHorizontalMover horizontalMover;
     private HazardVerticalMover   verticalMover;
 
     private void Awake()
     {
-        horizontalMover = GetComponent<HazardHorizontalMover>();
-        verticalMover   = GetComponent<HazardVerticalMover>();
+        originalPosition = transform.position;
+        horizontalMover  = GetComponent<HazardHorizontalMover>();
+        verticalMover    = GetComponent<HazardVerticalMover>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -72,7 +77,10 @@ public class HazardFallOnTouch : MonoBehaviour
 
     private IEnumerator FallRoutine()
     {
-        Vector3 startPosition = transform.position;
+        if (fallDelay > 0f)
+            yield return new WaitForSeconds(fallDelay);
+
+        Vector3 startPosition  = transform.position;
         Vector3 targetPosition = startPosition + Vector3.down * fallDistance;
 
         while ((transform.position - targetPosition).sqrMagnitude > 0.0001f)
@@ -81,5 +89,14 @@ public class HazardFallOnTouch : MonoBehaviour
             yield return null;
         }
         transform.position = targetPosition;
+    }
+
+    // Dipanggil oleh HazardResetManager setiap awal round baru.
+    public void ResetHazard()
+    {
+        StopAllCoroutines();
+        transform.position = originalPosition;
+        hasFallen          = false;
+        // Mover direset oleh HazardResetManager secara terpisah.
     }
 }

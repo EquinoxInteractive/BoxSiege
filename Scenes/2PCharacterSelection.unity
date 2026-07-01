@@ -170,6 +170,15 @@ MonoBehaviour:
   - mapName: TheDessert
     displayName: The Dessert
     previewSprite: {fileID: 21300000, guid: 054c99c487cb10d4689802befc6fe724, type: 3}
+  - mapName: TheJungle
+    displayName: The Jungle
+    previewSprite: {fileID: 21300000, guid: bb3ac1bac0d974645a032462bb1a8187, type: 3}
+  - mapName: TheSafari
+    displayName: The Safari
+    previewSprite: {fileID: 21300000, guid: 15d9131097ae07844ae8964becf6ff37, type: 3}
+  - mapName: TheTample
+    displayName: The Tample
+    previewSprite: {fileID: 21300000, guid: 950d49568b6df07408998bdf5e8bb44c, type: 3}
 --- !u!4 &42404323
 Transform:
   m_ObjectHideFlags: 0
@@ -1784,14 +1793,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb0c71d780d52140a853f869c8c9513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayers: 2
   player1Character: {fileID: 11400000, guid: d7a8ecbdca4e6c44ebcebe13ca5e0ab7, type: 2}
   player2Character: {fileID: 0}
+  player3Character: {fileID: 0}
+  player4Character: {fileID: 0}
   player1Weapon: {fileID: 0}
   player2Weapon: {fileID: 0}
+  player3Weapon: {fileID: 0}
+  player4Weapon: {fileID: 0}
   player1GamepadLayout: 
   player1GamepadIndex: -1
   player2GamepadLayout: 
   player2GamepadIndex: -1
+  player3GamepadLayout: 
+  player3GamepadIndex: -1
+  player4GamepadLayout: 
+  player4GamepadIndex: -1
 --- !u!4 &622716778
 Transform:
   m_ObjectHideFlags: 0
@@ -5226,6 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be7a35f626bda248badec06dbbd2926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayersInScene: 2
   player1Characters:
   - {fileID: 11400000, guid: 72b74c6c990ccec4893ebde8898b309c, type: 2}
   - {fileID: 11400000, guid: d7a8ecbdca4e6c44ebcebe13ca5e0ab7, type: 2}
@@ -5236,6 +5255,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c23b65a32468a9a4ca8be4ce38866ccb, type: 2}
   - {fileID: 11400000, guid: 8f0d898a50f57a84fadefc2f39a5ab1a, type: 2}
   - {fileID: 11400000, guid: 2fd9daec05bdfd14db1962711c3ea1dc, type: 2}
+  player3Characters: []
+  player4Characters: []
   player1Weapons:
   - {fileID: 11400000, guid: 0af7057730d1c834981292c3b4d998ed, type: 2}
   - {fileID: 11400000, guid: 76b91bfe053c0b7449fc46b25c23463e, type: 2}
@@ -5246,22 +5267,42 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1e55c580c4b2ab4dbefd302ecfa7edc, type: 2}
   - {fileID: 11400000, guid: 9d5b9e4573537944c8e8ef96fa2378b3, type: 2}
   - {fileID: 11400000, guid: 6e10d91be062a2b4bbfe133883f2ae8d, type: 2}
+  player3Weapons: []
+  player4Weapons: []
   player1SpriteRenderer: {fileID: 1644174275}
-  player2SpriteRenderer: {fileID: 1415947181}
   player1NameText: {fileID: 1139409424}
-  player2NameText: {fileID: 421849571}
   player1NextButton: {fileID: 1869202082}
   player1BackButton: {fileID: 1985040063}
+  player2SpriteRenderer: {fileID: 1415947181}
+  player2NameText: {fileID: 421849571}
   player2NextButton: {fileID: 790499382}
   player2BackButton: {fileID: 1889227688}
+  player3SpriteRenderer: {fileID: 0}
+  player3NameText: {fileID: 0}
+  player3NextButton: {fileID: 0}
+  player3BackButton: {fileID: 0}
+  player4SpriteRenderer: {fileID: 0}
+  player4NameText: {fileID: 0}
+  player4NextButton: {fileID: 0}
+  player4BackButton: {fileID: 0}
   player1WeaponImage: {fileID: 1313049198}
-  player2WeaponImage: {fileID: 1102637155}
   player1WeaponNameText: {fileID: 2098302803}
-  player2WeaponNameText: {fileID: 248554309}
   player1WeaponNextButton: {fileID: 354649023}
   player1WeaponBackButton: {fileID: 1511611894}
+  player2WeaponImage: {fileID: 1102637155}
+  player2WeaponNameText: {fileID: 248554309}
   player2WeaponNextButton: {fileID: 1888511092}
   player2WeaponBackButton: {fileID: 1626757781}
+  player3WeaponImage: {fileID: 0}
+  player3WeaponNameText: {fileID: 0}
+  player3WeaponNextButton: {fileID: 0}
+  player3WeaponBackButton: {fileID: 0}
+  player4WeaponImage: {fileID: 0}
+  player4WeaponNameText: {fileID: 0}
+  player4WeaponNextButton: {fileID: 0}
+  player4WeaponBackButton: {fileID: 0}
+  panelP3: {fileID: 0}
+  panelP4: {fileID: 0}
   playButton: {fileID: 940223662}
 --- !u!4 &1513383011
 Transform:

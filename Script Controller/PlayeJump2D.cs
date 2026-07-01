@@ -75,9 +75,9 @@ public class PlayeJump2D : MonoBehaviour
 
     // ──────────────────────────────────────────────────────────────────────────
     //  CheckGrounded
-    //  Pengecekan 1: groundLayer (platform/lantai)
-    //  Pengecekan 2: badan pemain lain — dicari via Rigidbody2D
-    //               (ground statis tidak punya Rigidbody2D, jadi aman)
+    //  Pengecekan 1: groundLayer (platform/lantai statis)
+    //  Pengecekan 2: badan pemain lain (Rigidbody2D Dynamic)
+    //  Pengecekan 3: hazard bergerak (HazardPlayerCarrier / Kinematic RB)
     // ──────────────────────────────────────────────────────────────────────────
     void CheckGrounded()
     {
@@ -86,18 +86,26 @@ public class PlayeJump2D : MonoBehaviour
         // --- Pengecekan 1: ground/platform biasa ---
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // --- Pengecekan 2: berdiri di atas pemain lain ---
+        // --- Pengecekan 2 & 3: pemain lain atau hazard bergerak ---
         if (!isGrounded)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius);
             foreach (Collider2D hit in hits)
             {
-                // Abaikan trigger dan collider milik diri sendiri (termasuk child)
                 if (hit.isTrigger) continue;
                 if (hit.transform.IsChildOf(transform) || hit.transform == transform) continue;
 
-                // Jika collider ini punya Rigidbody2D → ini adalah pemain lain
-                if (hit.attachedRigidbody != null)
+                // Hazard bergerak — deteksi via komponen HazardPlayerCarrier
+                if (hit.GetComponent<HazardPlayerCarrier>() != null ||
+                    hit.GetComponentInParent<HazardPlayerCarrier>() != null)
+                {
+                    isGrounded = true;
+                    break;
+                }
+
+                // Pemain lain memiliki Dynamic RB
+                Rigidbody2D hitRb = hit.attachedRigidbody;
+                if (hitRb != null && hitRb.bodyType == RigidbodyType2D.Dynamic)
                 {
                     isGrounded = true;
                     break;
