@@ -30,6 +30,12 @@ public class PauseMenuManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    // Ambil UIPanelAnimator dari pauseMenuPanel (kalau ada) supaya buka/tutup
+    // panel pause otomatis animasi dengan LeanTween. Kalau kamu belum menambahkan
+    // komponen UIPanelAnimator di GameObject pauseMenuPanel, semuanya tetap jalan
+    // seperti biasa (SetActive langsung) — TIDAK akan error.
+    private UIPanelAnimator pausePanelAnimator;
+
     // Static variables to persist between scenes
     private static bool isReturningFromMenu = false;
     private static int lastGameSceneIndex = -1;
@@ -54,6 +60,7 @@ public class PauseMenuManager : MonoBehaviour
         // Make sure pause menu is not active when game starts
         if (pauseMenuPanel != null)
         {
+            pausePanelAnimator = pauseMenuPanel.GetComponent<UIPanelAnimator>();
             pauseMenuPanel.SetActive(false);
         }
 
@@ -132,10 +139,13 @@ public class PauseMenuManager : MonoBehaviour
         // Set time scale to 0 to pause the game
         Time.timeScale = 0f;
 
-        // Show pause menu
+        // Show pause menu (dengan animasi kalau UIPanelAnimator ada, kalau tidak fallback SetActive biasa)
         if (pauseMenuPanel != null)
         {
-            pauseMenuPanel.SetActive(true);
+            if (pausePanelAnimator != null)
+                pausePanelAnimator.Open();
+            else
+                pauseMenuPanel.SetActive(true);
         }
 
         // Disable player movement and shooting
@@ -152,10 +162,13 @@ public class PauseMenuManager : MonoBehaviour
         // Set time scale back to 1 to resume the game
         Time.timeScale = 1f;
 
-        // Hide pause menu
+        // Hide pause menu (dengan animasi kalau UIPanelAnimator ada, kalau tidak fallback SetActive biasa)
         if (pauseMenuPanel != null)
         {
-            pauseMenuPanel.SetActive(false);
+            if (pausePanelAnimator != null)
+                pausePanelAnimator.Close();
+            else
+                pauseMenuPanel.SetActive(false);
         }
 
         // Enable player movement and shooting
@@ -178,10 +191,11 @@ public class PauseMenuManager : MonoBehaviour
         // Reset pause state
         isPaused = false;
 
-        // Load the main menu scene using index
+        // Load the main menu scene using index, lewat SceneTransitionManager supaya
+        // ada animasi fade out -> fade in yang sama/konsisten dengan scene lainnya.
         try
         {
-            SceneManager.LoadScene(mainMenuSceneIndex);
+            SceneTransitionManager.GoToScene(mainMenuSceneIndex);
         }
         catch (System.Exception e)
         {
@@ -277,8 +291,9 @@ public class PauseMenuManager : MonoBehaviour
         // Force time scale to 1
         Time.timeScale = 1f;
 
-        // Load the requested scene
-        SceneManager.LoadScene(sceneIndex);
+        // Load the requested scene, lewat SceneTransitionManager supaya ada animasi
+        // fade out -> fade in yang sama/konsisten dengan scene lainnya.
+        SceneTransitionManager.GoToScene(sceneIndex);
     }
 
     /// <summary>
@@ -294,7 +309,7 @@ public class PauseMenuManager : MonoBehaviour
         {
             // If no previous scene was recorded, use the first game scene
             Debug.LogWarning("No previous game scene recorded, loading default");
-            SceneManager.LoadScene(1); // Assuming the first game scene is at index 1
+            SceneTransitionManager.GoToScene(1); // Assuming the first game scene is at index 1
         }
     }
 

@@ -1,6 +1,8 @@
 // Main Menu.cs — Updated for 2P / 3P / 4P Selection
 // Tambahan: SetPlayerCount() untuk menyimpan jumlah pemain ke GameData
 //           sebelum masuk ke scene CharacterSelection yang sesuai.
+// Tambahan: semua pindah scene sekarang lewat SceneTransitionManager supaya
+//           ada animasi fade halus, bukan pindah scene mendadak.
 // File ini menggantikan: Main Menu/Main Menu.cs
 
 using UnityEngine;
@@ -8,45 +10,64 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    // Helper kecil: kalau SceneTransitionManager sudah di-setup (lihat
+    // SceneTransitionManager.cs), pakai itu supaya ada fade. Kalau belum
+    // sempat di-setup, tetap fallback ke load biasa supaya TIDAK ERROR.
+    private void GoToScene(string sceneName)
+    {
+        if (SceneTransitionManager.Instance != null)
+            SceneTransitionManager.Instance.LoadScene(sceneName);
+        else
+            SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    private void GoToScene(int sceneIndex)
+    {
+        if (SceneTransitionManager.Instance != null)
+            SceneTransitionManager.Instance.LoadScene(sceneIndex);
+        else
+            SceneManager.LoadScene(sceneIndex);
+    }
+
     public void Menu()
     {
-        SceneManager.LoadScene(0);
+        GoToScene(0);
     }
 
     // ─── Map Scenes (IN GAME) ─────────────────────────────────────────────
     public void TheEarth()
     {
-        SceneManager.LoadSceneAsync("TheEarth");
+        GoToScene("TheEarth");
     }
 
     public void TheHell()
     {
-        SceneManager.LoadSceneAsync("TheHell");
+        GoToScene("TheHell");
     }
 
     public void TheDessert()
     {
-        SceneManager.LoadSceneAsync("TheDessert");
+        GoToScene("TheDessert");
     }
 
     public void TheSnow()
     {
-        SceneManager.LoadSceneAsync("TheSnow");
+        GoToScene("TheSnow");
     }
 
     public void TheJungle()
     {
-        SceneManager.LoadSceneAsync("TheJungle");
+        GoToScene("TheJungle");
     }
 
     public void TheSafari()
     {
-        SceneManager.LoadSceneAsync("TheSafari");
+        GoToScene("TheSafari");
     }
 
     public void TheTample()
     {
-        SceneManager.LoadSceneAsync("TheTample");
+        GoToScene("TheTample");
     }
 
     // ─── Character Selection Scenes ───────────────────────────────────────
@@ -57,19 +78,19 @@ public class MainMenu : MonoBehaviour
     public void SelectionP2()
     {
         if (GameData.Instance != null) GameData.Instance.numberOfPlayers = 2;
-        SceneManager.LoadSceneAsync("2PCharacterSelection");
+        GoToScene("2PCharacterSelection");
     }
 
     public void SelectionP3()
     {
         if (GameData.Instance != null) GameData.Instance.numberOfPlayers = 3;
-        SceneManager.LoadSceneAsync("3PCharacterSelection");
+        GoToScene("3PCharacterSelection");
     }
 
     public void SelectionP4()
     {
         if (GameData.Instance != null) GameData.Instance.numberOfPlayers = 4;
-        SceneManager.LoadSceneAsync("4PCharacterSelection");
+        GoToScene("4PCharacterSelection");
     }
 
     // ─── Quit ─────────────────────────────────────────────────────────────

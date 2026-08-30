@@ -57,7 +57,8 @@ public class MapSelector : MonoBehaviour
 
     void PlayMap()
     {
-        // Memuat scene map yang dipilih
-        SceneManager.LoadScene(maps[currentMapIndex].mapName);
+        // Memuat scene map yang dipilih, lewat SceneTransitionManager supaya ada
+        // animasi fade out -> fade in yang sama/konsisten dengan scene lainnya.
+        SceneTransitionManager.GoToScene(maps[currentMapIndex].mapName);
     }
 }

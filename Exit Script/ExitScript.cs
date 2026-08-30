@@ -6,22 +6,24 @@ using UnityEngine.InputSystem.Samples.RebindUI;
 
 public class ExitScript : MonoBehaviour
 {
+    // Semua perpindahan scene di bawah ini lewat SceneTransitionManager supaya ada
+    // animasi fade out -> fade in yang sama/konsisten dengan scene lainnya.
     public void ExitGame()
     {
         SaveBindingsSafely();
-        SceneManager.LoadSceneAsync(0);
+        SceneTransitionManager.GoToScene(0);
     }
 
     public void TheEarth()
     {
         SaveBindingsSafely();
-        SceneManager.LoadSceneAsync(2);
+        SceneTransitionManager.GoToScene(2);
     }
 
     public void TheHell()
     {
         SaveBindingsSafely();
-        SceneManager.LoadSceneAsync(3);
+        SceneTransitionManager.GoToScene(3);
     }
 
     private void SaveBindingsSafely()

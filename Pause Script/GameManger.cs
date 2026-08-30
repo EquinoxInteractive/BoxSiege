@@ -928,6 +928,8 @@ public class GameManager : MonoBehaviour
     // ─── Restart ──────────────────────────────────────────────────────────────
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Lewat SceneTransitionManager supaya ada animasi fade out -> fade in yang
+        // sama/konsisten dengan perpindahan scene lainnya.
+        SceneTransitionManager.GoToScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
